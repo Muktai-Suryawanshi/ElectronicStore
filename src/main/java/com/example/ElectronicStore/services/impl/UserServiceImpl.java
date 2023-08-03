@@ -113,7 +113,7 @@ public class UserServiceImpl implements UserService {
         logger.info("Inside getAllUser");
         Page<User> page = userRepository.findAll(pageable);
         PageableResponse<UserDto> response = Helper.getPageableResponse(page,UserDto.class);
-        logger.info("List Of User: "+response);
+        logger.info("List of User: "+response);
         return response;
     }
 

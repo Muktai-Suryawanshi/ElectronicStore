@@ -42,7 +42,13 @@ public class UserController {
     @Autowired
     private FileService fileService;
 
-        //CREATE
+    /**
+     * @author Muktai Suryawanshi
+     * @apiNote createUser
+     * @param userDto
+     * @return user
+     */
+    //CREATE
         @PostMapping("/")
         public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto) {
             logger.info("Initiating request to create user");
@@ -51,7 +57,14 @@ public class UserController {
             return new ResponseEntity<>(user, HttpStatus.CREATED);
         }
 
-        //update
+
+    /**
+     * @author Muktai Suryawanshi
+     * @param userId
+     * @param userDto
+     * @return updatedUserDto
+     */
+    //update
         @PutMapping("/{userId}")
         public ResponseEntity<UserDto> updateUser(@PathVariable("userId") String userId,@Valid @RequestBody UserDto userDto) {
 
@@ -61,8 +74,13 @@ public class UserController {
             return new ResponseEntity<>(updatedUserDto, HttpStatus.OK);
         }
 
-
-        //delete
+    /**
+     * @author Muktai Suryawanshi
+     * @apiNote
+     * @param userId
+     * @return message
+     */
+    //delete
         @DeleteMapping("/{userId}")
         public ResponseEntity<String> deleteUser(@PathVariable("userId") String userId){
             logger.info("Initiating  request to delete userId");
@@ -74,8 +92,17 @@ public class UserController {
                 .status(HttpStatus.OK)
                 .build();
             logger.info("Completed request of delete userId");
-            return new ResponseEntity( message, HttpStatus.OK);
+            return new ResponseEntity(message, HttpStatus.OK);
     }
+
+    /**
+     * @author muktai suryawanshi
+     * @param pageNumber
+     * @param pageSize
+     * @param sortBy
+     * @param sortDir
+     * @return getAllUser
+     */
         // get All
         @GetMapping
         public ResponseEntity<PageableResponse<UserDto>>getAllUsers(
@@ -89,13 +116,24 @@ public class UserController {
             return new ResponseEntity<>(userService.getAllUser(pageNumber,pageSize,sortBy,sortDir), HttpStatus.OK);
         }
 
-        //get single
+    /**
+     * @author muktai suryawanshi
+     * @param userId
+     * @return
+     */
+    //get single
         @GetMapping("/{userId}")
         public ResponseEntity<UserDto> getUsers(@PathVariable String userId){
             logger.info("Initiating request to getUsers");
             return new ResponseEntity<>(userService.getUserById(userId), HttpStatus.OK);
         }
-        // get By email
+
+    /**
+     * author muktai suryawanshi
+     * @param email
+     * @return user
+     */
+    // get By email
         @GetMapping("/email/{email}")
         public ResponseEntity<UserDto> getUserByEmail(@PathVariable String email) {
             logger.info("Initiating request to get User by email");
