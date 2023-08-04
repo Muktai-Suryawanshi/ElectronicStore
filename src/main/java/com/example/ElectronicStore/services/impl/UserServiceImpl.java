@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -109,7 +110,7 @@ public class UserServiceImpl implements UserService {
     public PageableResponse<UserDto> getAllUser(int pageNumber, int pageSize, String sortBy, String sortDir) {
 
         Sort sort = Sort.by(sortBy);
-        PageRequest pageable = PageRequest.of(pageNumber,pageSize,sort);
+        Pageable pageable = PageRequest.of(pageNumber,pageSize,sort);
         logger.info("Inside getAllUser");
         Page<User> page = userRepository.findAll(pageable);
         PageableResponse<UserDto> response = Helper.getPageableResponse(page,UserDto.class);
